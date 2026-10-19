@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería Mitsubishi Lancer Evolution VII con Flexbox</title>
+    <style>
+        :root {
+            --primary: #e60012;
+            --bg-dark: #090a0f;
+            --card-bg: #131722;
+            --card-border: #232938;
+            --text-color: #f1f5f9;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-color);
+            padding: 30px 20px 60px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1150px;
+            margin: 0 auto;
+        }
+
+        /* ========================================================
+           1. ENCABEZADO CON FLEXBOX
+           display: flex para alinear título y badge a los extremos
+           ======================================================== */
+        header.hero-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 30px;
+            background: linear-gradient(135deg, #1c0e12 0%, #131722 100%);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            margin-bottom: 35px;
+        }
+
+        .hero-text h1 {
+            font-size: 2.2rem;
+            color: #fff;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-text h1 span {
+            color: var(--primary);
+        }
+
+        .hero-text p {
+            color: var(--text-muted);
+            margin-top: 5px;
+            font-size: 15px;
+        }
+
+        .badge-flex {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: rgba(230, 0, 18, 0.15);
+            border: 1px solid var(--primary);
+            padding: 10px 18px;
+            border-radius: 50px;
+            color: #ff4d4d;
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        /* ========================================================
+           2. CONTENEDOR PRINCIPAL DE TARJETAS (FLEX CONTAINER)
+           display: flex con wrap y gap
+           ======================================================== */
+        .gallery-flex {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+        }
+
+        /* ========================================================
+           3. CADA TARJETA (FLEX ITEM Y CONTENEDOR FLEX EN COLUMNA)
+           flex: 1 1 320px permite que las tarjetas se adapten automáticamente
+           ======================================================== */
+        .card-flex {
+            display: flex;
+            flex-direction: column;
+            flex: 1 1 320px;
+            max-width: 360px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .card-flex:hover {
+            transform: translateY(-6px);
+            border-color: var(--primary);
+            box-shadow: 0 12px 24px rgba(230, 0, 18, 0.15);
+        }
+
+        /* Imagen del auto */
+        .card-img-wrapper {
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+            background-color: #0b0d13;
+        }
+
+        .card-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .card-flex:hover .card-img-wrapper img {
+            transform: scale(1.06);
+        }
+
+        /* Contenido de la tarjeta (Flexbox en columna) */
+        .card-body-flex {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex-grow: 1; /* Ocupa todo el espacio restante para empujar el pie */
+            padding: 22px;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .card-description {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        /* Pie de la tarjeta (Flexbox fila) */
+        .card-footer-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid var(--card-border);
+        }
+
+        .spec-tag {
+            background-color: #1e2433;
+            color: #38bdf8;
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .btn-ver-flex {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background-color: var(--primary);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            transition: background-color 0.2s ease;
+        }
+
+        .btn-ver-flex:hover {
+            background-color: #c70010;
+        }
+
+        /* Banner inferior con Flexbox centrado */
+        .footer-banner-flex {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin-top: 45px;
+            padding: 20px;
+            background-color: var(--card-bg);
+            border: 1px dashed var(--card-border);
+            border-radius: 10px;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- Encabezado organizado con Flexbox -->
+        <header class="hero-flex">
+            <div class="hero-text">
+                <h1>Mitsubishi Lancer <span>Evolution VII</span></h1>
+                <p>Diseño y galería de modelos maquetados al 100% con <strong>CSS Flexbox</strong></p>
+            </div>
+            <div class="badge-flex">
+                ⚡ Plataforma CT9A (2001 - 2003)
+            </div>
+        </header>
+
+        <!-- Galería de tarjetas usando Flexbox -->
+        <main class="gallery-flex">
+
+            <!-- Tarjeta 1: Evo VII GSR -->
+            <article class="card-flex">
+                <div class="card-img-wrapper">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/64/Lancer-evo-7.jpg" alt="Mitsubishi Lancer Evolution VII Amarillo">
+                </div>
+                <div class="card-body-flex">
+                    <div>
+                        <h2 class="card-title">Evo VII GSR (Diente de León)</h2>
+                        <p class="card-description">
+                            El modelo estándar de calle que estrenó el diferencial central activo (ACD) y un turbocompresor optimizado que entrega 280 CV y 383 Nm de par.
+                        </p>
+                    </div>
+                    <div class="card-footer-flex">
+                        <span class="spec-tag">Manual 5 Vel.</span>
+                        <a href="#" class="btn-ver-flex">Detalles →</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Tarjeta 2: Evo VII Silver -->
+            <article class="card-flex">
+                <div class="card-img-wrapper">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/fc/Mitsubishi_Lancer_Evo_VII.jpg" alt="Mitsubishi Lancer Evolution VII Plata">
+                </div>
+                <div class="card-body-flex">
+                    <div>
+                        <h2 class="card-title">Evo VII RS (Competición)</h2>
+                        <p class="card-description">
+                            Versión aligerada para pilotos y equipos de rally. Prescinde de aislamiento acústico y comodidades para lograr la máxima relación peso-potencia.
+                        </p>
+                    </div>
+                    <div class="card-footer-flex">
+                        <span class="spec-tag">Aligerado RS</span>
+                        <a href="#" class="btn-ver-flex">Detalles →</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Tarjeta 3: Evo VII GT-A Front -->
+            <article class="card-flex">
+                <div class="card-img-wrapper">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Mitsubishi_Lancer_Evolution_VII_GT-A_front.JPG/1280px-Mitsubishi_Lancer_Evolution_VII_GT-A_front.JPG" alt="Mitsubishi Lancer Evolution VII GT-A frontal">
+                </div>
+                <div class="card-body-flex">
+                    <div>
+                        <h2 class="card-title">Evo VII GT-A (Automático)</h2>
+                        <p class="card-description">
+                            La primera variante automática con transmisión INVECS-II de 5 velocidades con levas en el volante y un capó sin tomas de aire para menor resistencia aerodinámica.
+                        </p>
+                    </div>
+                    <div class="card-footer-flex">
+                        <span class="spec-tag">Auto INVECS-II</span>
+                        <a href="#" class="btn-ver-flex">Detalles →</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Tarjeta 4: Evo VII Rally Spec -->
+            <article class="card-flex">
+                <div class="card-img-wrapper">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Mitsubishi_Lancer_Evolution_7_2002_%2850256707166%29.jpg/1280px-Mitsubishi_Lancer_Evolution_7_2002_%2850256707166%29.jpg" alt="Mitsubishi Lancer Evolution VII Rally">
+                </div>
+                <div class="card-body-flex">
+                    <div>
+                        <h2 class="card-title">Evo VII Rally Edition</h2>
+                        <p class="card-description">
+                            Preparación para asfalto y tierra con suspensión de carreras, frenos sobredimensionados Brembo y chasis monocasco con rigidez torsional aumentada un 50%.
+                        </p>
+                    </div>
+                    <div class="card-footer-flex">
+                        <span class="spec-tag">4G63 Turbo ACD</span>
+                        <a href="#" class="btn-ver-flex">Detalles →</a>
+                    </div>
+                </div>
+            </article>
+
+        </main>
+
+        <!-- Pie de página con Flexbox -->
+        <footer class="footer-banner-flex">
+            <span>Diseñado con <strong>Flexbox</strong>: <code>display: flex</code>, <code>flex-wrap: wrap</code>, <code>gap: 25px</code> y <code>flex: 1 1 320px</code>.</span>
+        </footer>
+
+    </div>
+
+</body>
+</html>
